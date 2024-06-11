@@ -7,21 +7,22 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    protected $task;
+    protected $product;
 
     public function __construct()
     {
-        $this->task = new Product();
+        $this->product = new Product();
     }
 
     public function index()
     {
-        return view('');
+        $response ['products'] = $this->product->all();
+        return view('pages.productDashboard')->with($response);
     }
 
     public function store(Request $request)
     {
-        $this->task->create([
+        $this->product->create([
             'product_title' => $request->input('product_title'),
             'category' => $request->input('category'),
             'quantity' => $request->input('quantity'),

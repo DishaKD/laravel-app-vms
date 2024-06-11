@@ -12,6 +12,6 @@ Route::get('/addProduct', [AddProductController::class, "index"]) -> name ('add'
 
 
 Route::prefix('/product')->group(function (){
-    Route::get('/', [ProductController::class, "index"]) -> name ('productsView');
+    Route::get('/dashboard', [ProductController::class, "index"]) -> name ('productsView');
     Route::post('/store', [ProductController::class, "store"]) -> name ('product.store');
 });
