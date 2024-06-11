@@ -8,12 +8,12 @@
 
 
             <form action="{{ route('product.store') }}" method="post">
-                <!-- 2 column grid layout with text inputs for the first and last names -->
                 @csrf
                 <div class="row mb-4">
                     <div class="col">
                         <div data-mdb-input-init class="form-outline">
-                            <input type="text" id="productTitle" class="form-control" required minlength="3" />
+                            <input type="text" name="product_title" id="productTitle" class="form-control" required
+                                minlength="3" />
                             <label class="form-label" for="productTitle">Product Title</label>
                             <div class="invalid-feedback">Product Title is required and should be at least 3 characters
                                 long.</div>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col">
                         <div data-mdb-input-init class="form-outline">
-                            <select id="category" class="form-control" required>
+                            <select id="category" class="form-control" name="category" required>
                                 <option value="">Choose category</option>
                                 <option value="laptops">Laptops</option>
                                 <option value="smartphones">Smartphones</option>
@@ -40,16 +40,14 @@
                     </div>
                 </div>
 
-                <!-- Number input -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="number" id="quantity" class="form-control" required min="1" />
+                    <input type="number" name="quantity" id="quantity" class="form-control" required min="1" />
                     <label class="form-label" for="quantity">Quantity</label>
                     <div class="invalid-feedback">Quantity is required and should be at least 1.</div>
                 </div>
 
-                <!-- Status dropdown -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                    <select id="status" class="form-control" required>
+                    <select id="status" class="form-control" name="status" required>
                         <option value="">Choose status</option>
                         <option value="approved">Approved</option>
                         <option value="not_approved">Not Approved</option>
@@ -58,9 +56,10 @@
                     <div class="invalid-feedback">Status is required.</div>
                 </div>
 
-                <!-- Submit button -->
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Place order</button>
             </form>
+
+
 
         </div>
 
