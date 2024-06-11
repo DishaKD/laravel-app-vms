@@ -5,9 +5,9 @@
                 <img src="{{ 'images/logo-wms.png' }}" height="100" alt="WMS Logo" loading="lazy" />
             </a>
             <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                 <a class="nav-link" href="#">Dashboard</a>
-                <a class="nav-link" href="#">Add Product</a>
+                <a class="nav-link" href="{{ route('add') }}">Add Product</a>
                 <a class="nav-link" href="#">Add User</a>
 
             </nav>
