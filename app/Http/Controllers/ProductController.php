@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductController extends ParentController
 {
     protected $product;
 
-    public function __construct()
-    {
-        $this->product = new Product();
-    }
+    // public function __construct()
+    // {
+    //     $this->product = new Product();
+    // }
 
     public function index()
     {
-        $response ['products'] = $this->product->all();
+        $response ['products'] = Product::all();
         return view('pages.productDashboard')->with($response);
     }
 
