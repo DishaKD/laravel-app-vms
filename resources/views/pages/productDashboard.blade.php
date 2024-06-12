@@ -49,12 +49,16 @@
                         </td>
 
                         <td>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                Delete
-                            </button>
+                            <a href="">
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    Edit
+                                </button>
+                            </a>
+                            <a href="{{ route('product.delete', $product->id) }}">
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    Delete
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
