@@ -55,9 +55,7 @@
                                 </button>
                             </a>
                             <a href="{{ route('product.delete', $product->id) }}">
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    Delete
-                                </button>
+                                <i class="bi bi-trash " style="font-size: 1.5rem; color: rgb(255, 0, 0);"></i>
                             </a>
                         </td>
                     </tr>
