@@ -11,8 +11,13 @@ class Product extends Model
 
     protected $fillable = [
         'product_title',
+        'product_sku',
         'category',
         'quantity',
+        'order_from',
+        'order_by',
+        'contact_info',
+        'special_instructions',
         'status'
     ];
 }
