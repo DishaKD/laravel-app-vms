@@ -56,10 +56,10 @@
             <div class="form-outline mb-4" style="width: 100%;">
                 <select name="order_from" id="from" class="form-control bg-dark text-white border-white" required>
                     <option value="" selected disabled>Select Warehouse</option>
-                    <option value="Ampara">Galle</option>
-                    <option value="Anuradhapura">Kandy</option>
-                    <option value="Badulla">Gampaha</option>
-                    <option value="Batticaloa">Kalutara</option>
+                    <option value="Galle">Galle</option>
+                    <option value="Kandy">Kandy</option>
+                    <option value="Gampaha">Gampaha</option>
+                    <option value="Kalutara">Kalutara</option>
                     <option value="Colombo">Colombo</option>
                     <!-- Add more options for other districts -->
                 </select>
