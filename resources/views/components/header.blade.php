@@ -6,9 +6,8 @@
             </a>
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
-                <a class="nav-link" href="#">Dashboard</a>
-                <a class="nav-link" href="{{ route('add') }}">Add Product</a>
-                <a class="nav-link" href="#">Add User</a>
+                <a class="nav-link" href="{{ route('productsView') }}">Product Dashboard</a>
+                <a class="nav-link" href="{{ route('add') }}">Request Product</a>
 
             </nav>
         </div>
