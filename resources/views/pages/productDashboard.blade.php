@@ -14,10 +14,26 @@
             <p>Click "Delete" to remove a product request.</p>
         </div>
 
+        <!-- Search Input -->
+        <form method="GET" action="{{ route('productsView') }}">
+            <div class="input-group rounded mb-3">
+                <input type="search" class="form-control rounded" name="search" placeholder="Search" aria-label="Search"
+                    aria-describedby="search-addon" value="{{ request()->input('search') }}" />
+                <span class="input-group-text border-0" id="search-addon">
+                    <i class="bi bi-search" style="color: black;"></i>
+                </span>
+            </div>
+        </form>
+
         <!-- Table Section -->
         <table class="table align-middle mb-0 bg-white">
             <thead class="bg-light">
                 <tr>
+                    <th scope="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="selectAll" />
+                        </div>
+                    </th>
                     <th>Product ID</th>
                     <th>Product Title</th>
                     <th>Product SKU</th>
@@ -30,6 +46,12 @@
             <tbody>
                 @foreach ($products as $product)
                     <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input product-checkbox" type="checkbox"
+                                    data-product-id="{{ $product->id }}" />
+                            </div>
+                        </td>
                         <td>
                             <p class="fw-normal mb-1">{{ $product->id }}</p>
                         </td>
@@ -53,9 +75,9 @@
                                 <button type="button" class="btn btn-link btn-sm btn-rounded" data-toggle="modal"
                                     data-target="#editModal{{ $product->id }}"
                                     data-product-title="{{ $product->product_title }}"
-                                    data-product-sku="{{ $product->product_sku }}" data-category="{{ $product->category }}"
-                                    data-quantity="{{ $product->quantity }}" data-order-from="{{ $product->order_from }}"
-                                    data-order-by="{{ $product->order_by }}"
+                                    data-product-sku="{{ $product->product_sku }}"
+                                    data-category="{{ $product->category }}" data-quantity="{{ $product->quantity }}"
+                                    data-order-from="{{ $product->order_from }}" data-order-by="{{ $product->order_by }}"
                                     data-contact-info="{{ $product->contact_info }}"
                                     data-special-instructions="{{ $product->special_instructions }}">
                                     Edit
@@ -67,8 +89,25 @@
                         </td>
                     </tr>
                 @endforeach
-
             </tbody>
         </table>
     </div>
+
+
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                // JavaScript logic for select all checkboxes
+                $('#selectAll').change(function() {
+                    $('.product-checkbox').prop('checked', $(this).prop('checked'));
+                });
+
+                $('.product-checkbox').change(function() {
+                    if (!$(this).prop('checked')) {
+                        $('#selectAll').prop('checked', false);
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection

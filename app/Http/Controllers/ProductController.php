@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 class ProductController extends ParentController
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $response['products'] = ProductFacade::index();
+        $search = $request->input('search');
+        $response['products'] = ProductFacade::index($search);
         return view('pages.productDashboard')->with($response);
     }
 

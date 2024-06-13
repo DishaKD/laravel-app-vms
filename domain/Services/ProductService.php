@@ -14,11 +14,15 @@ class ProductService
         $this->product = new Product();
     }
 
-    public function index()
+    public function index($search = null)
     {
+        if ($search) {
+            return $this->product->where('product_title', 'LIKE', "%{$search}%")
+                ->orWhere('id', 'LIKE', "%{$search}%")
+                ->get();
+        }
         return $this->product->all();
     }
-
     public function get($product_id)
     {
         return $this->product->find($product_id);
