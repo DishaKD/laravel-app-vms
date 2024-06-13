@@ -21,7 +21,7 @@ Route::prefix('/product')->group(function () {
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', [AdminController::class, "index"])->name('admin');
-    // Route::post('/store', [AdminController::class, "store"])->name('product.store');
-    // Route::post('/{product_id}/update', [AdminController::class, "update"])->name('product.update');
+    Route::get('/admin/login', [AdminController::class, 'index'])->name('admin.login');
+    Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
     // Route::get('/{product_id}/delete', [AdminController::class, "delete"])->name('product.delete');
 });
