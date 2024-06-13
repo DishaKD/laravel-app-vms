@@ -5,7 +5,7 @@ namespace domain\Facade;
 use domain\Services\AdminService;
 use Illuminate\Support\Facades\Facade;
 
-class ProductFacade extends Facade
+class AdminFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
