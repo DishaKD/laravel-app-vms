@@ -19,9 +19,12 @@ Route::prefix('/product')->group(function () {
     Route::get('/{product_id}/delete', [ProductController::class, "delete"])->name('product.delete');
 });
 
+
+
 Route::prefix('/admin')->group(function () {
-    Route::get('/', [AdminController::class, "index"])->name('admin');
-    Route::get('/admin/login', [AdminController::class, 'index'])->name('admin.login');
+    Route::get('/login', [AdminController::class, "index"])->name('admin');
     Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
+    Route::get('/dashboard', [AdminController::class, "dashboard"])->name('admin.dashboard');
+
     // Route::get('/{product_id}/delete', [AdminController::class, "delete"])->name('product.delete');
 });
