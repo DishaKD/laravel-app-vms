@@ -1,5 +1,9 @@
 @include('libraries.styles')
 
+<Head>
+    <title>WMS Login</title>
+</Head>
+
 <body style="background-image: url('images/login-back.jpg'); background-size: cover;">
 
     <div class="container-fluid bg-custom py-5">
