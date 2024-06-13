@@ -1,3 +1,5 @@
+<!-- resources/views/pages/admin/adminLogin.blade.php -->
+
 @include('libraries.styles')
 
 <section class="vh-100 bg-dark">
@@ -13,7 +15,7 @@
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
-                                <form method="POST" action="">
+                                <form method="POST" action="{{ route('admin.login.submit') }}">
                                     @csrf
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
