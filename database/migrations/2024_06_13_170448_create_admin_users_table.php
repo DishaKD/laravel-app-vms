@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->string('phone_number');
-            $table->date('dob');
+            $table->string('password', 60); // Adjusted to ensure enough length for hashed passwords
+            $table->string('phone_number')->nullable(); // Nullable if not always required
+            $table->date('dob')->nullable(); // Nullable if not always required
             $table->timestamps();
+
+            // Indexes
+            $table->index('email');
         });
     }
 
