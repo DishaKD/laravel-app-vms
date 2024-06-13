@@ -15,15 +15,19 @@
         </div>
 
         <!-- Search Input -->
-        <form method="GET" action="{{ route('productsView') }}">
-            <div class="input-group rounded mb-3">
-                <input type="search" class="form-control rounded" name="search" placeholder="Search" aria-label="Search"
-                    aria-describedby="search-addon" value="{{ request()->input('search') }}" />
-                <span class="input-group-text border-0" id="search-addon">
-                    <i class="bi bi-search" style="color: black;"></i>
-                </span>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <form method="get" action="{{ route('productsView') }}">
+                    <div class="input-group rounded">
+                        <input type="search" class="form-control rounded" name="search" placeholder="Search"
+                            aria-label="Search" aria-describedby="search-addon" value="{{ request()->input('search') }}" />
+                        <span class="input-group-text border-0" id="search-addon">
+                            <i class="bi bi-search" style="color: black;"></i>
+                        </span>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
 
         <!-- Table Section -->
         <table class="table align-middle mb-0 bg-white">
@@ -34,7 +38,7 @@
                             <input class="form-check-input" type="checkbox" id="selectAll" />
                         </div>
                     </th>
-                    <th>Product ID</th>
+                    <th>Order ID</th>
                     <th>Product Title</th>
                     <th>Product SKU</th>
                     <th>Category</th>
