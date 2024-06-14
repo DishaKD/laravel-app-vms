@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use domain\Facade\AdminFacade;
+use domain\Facade\ProductFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
@@ -65,5 +66,19 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('admin.dashboard')->withErrors(['message' => 'Logout failed. Please try again.']);
         }
+    }
+
+    public function orders()
+    {
+        $adminUser = session('adminUser');
+
+        if (!$adminUser) {
+            return redirect()->route('admin')->withErrors(['message' => 'Admin user not found.']);
+        }
+
+        // Fetch products using ProductFacade::index() method
+        $products = ProductFacade::index();
+
+        return view('pages.admin.adminOrders', compact('adminUser', 'products'));
     }
 }
