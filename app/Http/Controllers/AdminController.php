@@ -22,8 +22,15 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('pages.admin.adminDashboard');
+        $adminUser = session('adminUser');
+
+        if (!$adminUser) {
+            return redirect()->route('admin')->withErrors(['message' => 'Admin user not found.']);
+        }
+
+        return view('pages.admin.adminDashboard', compact('adminUser'));
     }
+
 
     public function login(Request $request)
     {
@@ -37,16 +44,14 @@ class AdminController extends Controller
 
             Log::info('Email: ' . $request->input('email'));
 
-            // Attempt login using AdminService
             $adminUser = $this->adminService->login($request);
 
             Log::info('Hashed Password from DB: ' . $adminUser->password);
 
+            session(['adminUser' => $adminUser]);
 
-            // Redirect to admin dashboard upon successful login
             return redirect()->route('admin.dashboard');
         } catch (\Exception $e) {
-            // Handle exceptions by redirecting back with input and error messages
             return back()->withInput()->withErrors(['email' => $e->getMessage()]);
         }
     }
