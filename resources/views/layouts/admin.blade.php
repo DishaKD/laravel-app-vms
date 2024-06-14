@@ -9,16 +9,17 @@
     @include('libraries.styles')
 </head>
 
-
-
 @include('components.Admin.sidebar')
 
 
-@yield('content')
+<div class="main-content">
+    @include('components.Admin.topNavBar')
+    @yield('content')
+</div>
 
-@include('components.footer')
 
 
 @include('libraries.scripts')
+@include('libraries.adminScript')
 
 </html>
