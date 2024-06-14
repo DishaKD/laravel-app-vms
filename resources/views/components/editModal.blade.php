@@ -1,7 +1,7 @@
 <!-- Edit Modal -->
 @foreach ($products as $product)
     <!-- Edit Modal for each product -->
-    <div class="modal fade" id="editModal{{ $product->id }}" tabindex="-1" role="dialog"
+    <div class="modal fade text-dark" id="editModal{{ $product->id }}" tabindex="-1" role="dialog"
         aria-labelledby="editModalLabel{{ $product->id }}" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -11,7 +11,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="text-align: left;">
                     <form id="editProductForm{{ $product->id }}"
                         action="{{ route('product.update', ['product_id' => $product->id]) }}" method="post">
                         @csrf
