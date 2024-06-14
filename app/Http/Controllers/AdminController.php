@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use domain\Facade\AdminFacade;
 use Illuminate\Http\Request;
-use domain\Services\AdminService;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
 
 class AdminController extends Controller
 {
-    protected $adminService;
-
-    public function __construct(AdminService $adminService)
-    {
-        $this->adminService = $adminService;
-    }
 
     public function index()
     {
@@ -44,15 +40,30 @@ class AdminController extends Controller
 
             Log::info('Email: ' . $request->input('email'));
 
-            $adminUser = $this->adminService->login($request);
+            $adminUser = AdminFacade::login($request);
 
             Log::info('Hashed Password from DB: ' . $adminUser->password);
 
             session(['adminUser' => $adminUser]);
 
             return redirect()->route('admin.dashboard');
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (AuthenticationException $e) {
+            return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
         } catch (\Exception $e) {
-            return back()->withInput()->withErrors(['email' => $e->getMessage()]);
+            Log::error('Unexpected error during login: ' . $e->getMessage());
+            return back()->withErrors(['email' => 'An unexpected error occurred'])->withInput();
+        }
+    }
+
+    public function logout()
+    {
+        try {
+            AdminFacade::logout();
+            return redirect()->route('admin')->with('success', 'Logged out successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.dashboard')->withErrors(['message' => 'Logout failed. Please try again.']);
         }
     }
 }
