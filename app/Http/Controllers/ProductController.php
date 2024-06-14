@@ -41,10 +41,15 @@ class ProductController extends ParentController
         return redirect()->back();
     }
 
-
     public function update(Request $request, $id)
     {
         ProductFacade::update($request->all(), $id);
+        return redirect()->back();
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        ProductFacade::updateStatus($request->all(), $id);
         return redirect()->back();
     }
 }

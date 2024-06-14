@@ -67,4 +67,23 @@ class ProductService
             ]);
         }
     }
+
+    public function updateStatus(array $data, $id)
+    {
+        $product = $this->product->find($id);
+
+        if ($product) {
+            $product->update([
+                'product_title' => $data['product_title'],
+                'product_sku' => $data['product_sku'],
+                'category' => $data['category'],
+                'quantity' => $data['quantity'],
+                'order_from' => $data['order_from'],
+                'order_by' => $data['order_by'],
+                'contact_info' => $data['contact_info'],
+                'special_instructions' => $data['special_instructions'],
+                'status' => $data['update_status'],
+            ]);
+        }
+    }
 }
