@@ -81,4 +81,10 @@ class AdminController extends Controller
 
         return view('pages.admin.adminOrders', compact('adminUser', 'products'));
     }
+
+
+    public function generateProductReport()
+    {
+        return AdminFacade::generateProductReport();
+    }
 }

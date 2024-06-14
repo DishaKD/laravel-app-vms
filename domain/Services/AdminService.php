@@ -3,9 +3,12 @@
 namespace Domain\Services;
 
 use App\Models\AdminUsers;
+use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class AdminService
 {
@@ -63,5 +66,45 @@ class AdminService
 
             throw $e;
         }
+    }
+
+
+    public function generateProductReport()
+    {
+        // Fetch products data
+        $products = Product::all();
+
+        // Generate PDF
+        $pdf = $this->generatePdfView('admin.reports.product_report', compact('products'));
+
+        return $pdf;
+    }
+
+    private function generatePdfView($view, $data = [])
+    {
+        // Load the view into a HTML string
+        $html = view($view, $data)->render();
+
+        // Configure Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $options->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($options);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Set paper size and orientation
+        $dompdf->setPaper('A4', 'landscape'); // Landscape orientation
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF (inline or download)
+        return $dompdf->stream('product_report.pdf');
     }
 }
