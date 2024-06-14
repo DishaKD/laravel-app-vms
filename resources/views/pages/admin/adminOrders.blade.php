@@ -5,7 +5,8 @@
     <div>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Orders</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <a href="{{ route('admin.generate.product.report') }}"
+                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
             </a>
         </div>
@@ -62,9 +63,9 @@
                                 <button type="button" class="btn btn-link btn-sm btn-rounded" data-toggle="modal"
                                     data-target="#editModal{{ $product->id }}"
                                     data-product-title="{{ $product->product_title }}"
-                                    data-product-sku="{{ $product->product_sku }}" data-category="{{ $product->category }}"
-                                    data-quantity="{{ $product->quantity }}" data-order-from="{{ $product->order_from }}"
-                                    data-order-by="{{ $product->order_by }}"
+                                    data-product-sku="{{ $product->product_sku }}"
+                                    data-category="{{ $product->category }}" data-quantity="{{ $product->quantity }}"
+                                    data-order-from="{{ $product->order_from }}" data-order-by="{{ $product->order_by }}"
                                     data-contact-info="{{ $product->contact_info }}" data-status="{{ $product->status }}"
                                     data-special-instructions="{{ $product->special_instructions }}">
                                     Update Status
