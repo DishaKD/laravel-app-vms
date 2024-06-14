@@ -16,6 +16,7 @@ Route::prefix('/product')->group(function () {
     Route::get('/dashboard', [ProductController::class, "index"])->name('productsView');
     Route::post('/store', [ProductController::class, "store"])->name('product.store');
     Route::post('/{product_id}/update', [ProductController::class, "update"])->name('product.update');
+    Route::post('/{product_id}/updateStatus', [ProductController::class, "updateStatus"])->name('product.status');
     Route::get('/{product_id}/delete', [ProductController::class, "delete"])->name('product.delete');
 });
 
@@ -26,5 +27,7 @@ Route::prefix('/admin')->group(function () {
     Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
     Route::get('/dashboard', [AdminController::class, "dashboard"])->name('admin.dashboard');
     Route::post('/logout', [AdminController::class, "logout"])->name('admin.logout');
+    Route::get('/adminDashboard/orders', [AdminController::class, "orders"])->name('admin.orders');
+
     // Route::get('/{product_id}/delete', [AdminController::class, "delete"])->name('product.delete');
 });
