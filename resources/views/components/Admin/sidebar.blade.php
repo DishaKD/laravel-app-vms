@@ -11,6 +11,13 @@
             padding-bottom: 50px;
         }
 
+        .sidebar .nav-link.active {
+            background-color: blue;
+            /* Active background color */
+            color: white;
+            /* Text color for active link */
+        }
+
         .main-content {
             margin-left: 280px;
             padding: 20px;
@@ -29,13 +36,14 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i>
                     Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link text-white">
+                <a href="{{ route('admin.orders') }}"
+                    class="nav-link {{ Request::is('admin/orders*') ? 'active' : '' }}">
                     <i class="bi bi-border-style"></i>
                     Orders
                 </a>
