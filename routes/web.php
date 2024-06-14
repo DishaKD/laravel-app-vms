@@ -25,6 +25,6 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [AdminController::class, "index"])->name('admin');
     Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
     Route::get('/dashboard', [AdminController::class, "dashboard"])->name('admin.dashboard');
-
+    Route::post('/logout', [AdminController::class, "logout"])->name('admin.logout');
     // Route::get('/{product_id}/delete', [AdminController::class, "delete"])->name('product.delete');
 });
