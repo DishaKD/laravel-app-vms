@@ -50,6 +50,6 @@ class ProductController extends ParentController
     public function updateStatus(Request $request, $id)
     {
         ProductFacade::updateStatus($request->all(), $id);
-        return redirect()->back();
+        return redirect()->route('admin.orders');
     }
 }
