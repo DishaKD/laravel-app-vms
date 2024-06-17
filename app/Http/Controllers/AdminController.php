@@ -96,7 +96,9 @@ class AdminController extends Controller
             return redirect()->route('admin')->withErrors(['message' => 'Admin user not found.']);
         }
 
-        return view('pages.admin.adminProduct', compact('adminUser'));
+        $products = AdminFacade::getAllProducts();
+
+        return view('pages.admin.adminProduct', compact('adminUser', 'products'));
     }
 
     public function AddProduct()
@@ -108,5 +110,25 @@ class AdminController extends Controller
         }
 
         return view('pages.admin.adminAddProduct', compact('adminUser'));
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'product_sku' => 'nullable|string|max:50',
+            'category' => 'required|string',
+            'initial_price' => 'required|numeric',
+            'selling_price' => 'required|numeric',
+            'stock' => 'required|integer',
+        ]);
+
+        try {
+            AdminFacade::store($validatedData);
+
+            return redirect()->route('admin.addProducts')->with('success', 'Product created successfully!');
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

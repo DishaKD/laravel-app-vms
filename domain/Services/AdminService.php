@@ -3,7 +3,9 @@
 namespace Domain\Services;
 
 use App\Models\AdminUsers;
+use App\Models\Orders;
 use App\Models\Product;
+use App\Models\Products;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -24,7 +26,6 @@ class AdminService
         try {
             $credentials = $request->only('email', 'password');
 
-            // Logging email for debugging
             Log::info('Login attempt for email: ' . $credentials['email']);
 
             $adminUser = AdminUsers::where('email', $credentials['email'])->first();
@@ -33,25 +34,21 @@ class AdminService
                 throw new \Exception('Invalid credentials');
             }
 
-            // Logging fetched admin user information (optional)
             Log::info('Fetched admin user: ' . $adminUser->toJson());
 
-            // Verify the password using Laravel's Hash facade
             if (!Hash::check($credentials['password'], $adminUser->password)) {
                 throw new \Exception('Invalid credentials');
             } else {
                 Log::info('Password check result: Hash matches');
             }
 
-            // Logging successful login (optional)
             Log::info('Admin user logged in successfully: ' . $adminUser->email);
 
             return $adminUser;
         } catch (\Exception $e) {
-            // Logging authentication failure
             Log::error('Authentication error: ' . $e->getMessage());
 
-            throw $e; // Rethrow the exception to propagate it
+            throw $e;
         }
     }
 
@@ -71,10 +68,8 @@ class AdminService
 
     public function generateProductReport()
     {
-        // Fetch products data
-        $products = Product::all();
+        $products = Orders::all();
 
-        // Generate PDF
         $pdf = $this->generatePdfView('admin.reports.product_report', compact('products'));
 
         return $pdf;
@@ -82,29 +77,48 @@ class AdminService
 
     private function generatePdfView($view, $data = [])
     {
-        // Load the view into a HTML string
         $html = view($view, $data)->render();
 
-        // Configure Dompdf
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
         $options->set('isRemoteEnabled', true);
         $options->set('defaultFont', 'Arial');
 
-        // Instantiate Dompdf with our options
         $dompdf = new Dompdf($options);
 
-        // Load HTML to Dompdf
         $dompdf->loadHtml($html);
 
-        // (Optional) Set paper size and orientation
         $dompdf->setPaper('A4', 'landscape'); // Landscape orientation
 
-        // Render the HTML as PDF
         $dompdf->render();
 
-        // Output the generated PDF (inline or download)
         return $dompdf->stream('product_report.pdf');
+    }
+
+    public function store(array $data)
+    {
+        try {
+            $product = Products::create([
+                'product_name' => $data['product_name'],
+                'product_sku' => $data['product_sku'],
+                'category' => $data['category'],
+                'initial_price' => $data['initial_price'],
+                'selling_price' => $data['selling_price'],
+                'stock' => $data['stock'],
+            ]);
+
+            Log::info('Product created successfully: ' . $product->id);
+
+            return $product;
+        } catch (\Exception $e) {
+            Log::error('Error creating product: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function getAllProducts()
+    {
+        return Products::all();
     }
 }
