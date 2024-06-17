@@ -28,10 +28,13 @@ Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, "dashboard"])->name('admin.dashboard');
     Route::post('/logout', [AdminController::class, "logout"])->name('admin.logout');
     Route::get('/adminDashboard/orders', [AdminController::class, "orders"])->name('admin.orders');
-    Route::get('/admin/generate-product-report', [AdminController::class, 'generateProductReport'])
-        ->name('admin.generate.product.report');
+    Route::get('/admin/generate-order-report', [AdminController::class, 'generateOrderReport'])
+        ->name('admin.generate.order.report');
     Route::get('/adminDashboard/products', [AdminController::class, "products"])->name('admin.products');
     Route::get('/adminDashboard/products/create', [AdminController::class, "AddProduct"])->name('admin.addProducts');
     Route::post('/admin/products/store', [AdminController::class, "store"])->name('admin.products.store');
     Route::post('/admin/{product_id}/update', [AdminController::class, "update"])->name('admin.product.update');
+    Route::get('/admin/{product_id}/delete', [AdminController::class, "delete"])->name('admin.product.delete');
+    Route::get('/admin/generate-product-report', [AdminController::class, 'generateProductReport'])
+        ->name('admin.generate.product.report');
 });
