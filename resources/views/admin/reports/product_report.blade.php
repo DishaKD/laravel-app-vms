@@ -60,33 +60,31 @@
         </div>
     </div>
 
-    <h1 style="text-align: center;">Order Report</h1>
+    <h1 style="text-align: center;">Product Report</h1>
 
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Title</th>
+                <th>Product ID</th>
+                <th>Name</th>
                 <th>SKU</th>
                 <th>Category</th>
-                <th>Quantity</th>
-                <th>Order From</th>
-                <th>Order By</th>
-                <th>Contact Info</th>
-                <th>Ordered Date</th>
+                <th>Initial Price (LKR)</th>
+                <th>Selling Price (LKR)</th>
+                <th>Stocks</th>
+                <th>Date Added</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($products as $product)
                 <tr>
                     <td>{{ $product->id }}</td>
-                    <td>{{ $product->product_title }}</td>
+                    <td>{{ $product->product_name }}</td>
                     <td>{{ $product->product_sku }}</td>
                     <td>{{ $product->category }}</td>
-                    <td>{{ $product->quantity }}</td>
-                    <td>{{ $product->order_from }}</td>
-                    <td>{{ $product->order_by }}</td>
-                    <td>{{ $product->contact_info }}</td>
+                    <td>{{ $product->initial_price }}</td>
+                    <td>{{ $product->selling_price }}</td>
+                    <td>{{ $product->stock }}</td>
                     <td>{{ $product->created_at }}</td>
                 </tr>
             @endforeach
