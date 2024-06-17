@@ -2,6 +2,7 @@
 
 namespace domain\Services;
 
+use App\Models\Orders;
 use App\Models\Product;
 
 class ProductService
@@ -11,7 +12,7 @@ class ProductService
 
     public function __construct()
     {
-        $this->product = new Product();
+        $this->product = new Orders();
     }
 
     public function index($search = null)
