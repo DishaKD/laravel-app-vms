@@ -49,7 +49,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link text-white">
+                <a href="{{ route('admin.products') }}"
+                    class="nav-link {{ Request::is('admin/products*') ? 'active' : '' }}">
                     <i class="bi bi-box-fill"></i>
                     Products
                 </a>

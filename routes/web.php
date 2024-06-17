@@ -30,5 +30,5 @@ Route::prefix('/admin')->group(function () {
     Route::get('/adminDashboard/orders', [AdminController::class, "orders"])->name('admin.orders');
     Route::get('/admin/generate-product-report', [AdminController::class, 'generateProductReport'])
         ->name('admin.generate.product.report');
-    // Route::get('/{product_id}/delete', [AdminController::class, "delete"])->name('product.delete');
+    Route::get('/adminDashboard/products', [AdminController::class, "products"])->name('admin.products');
 });

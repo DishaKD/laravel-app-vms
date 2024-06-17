@@ -76,7 +76,6 @@ class AdminController extends Controller
             return redirect()->route('admin')->withErrors(['message' => 'Admin user not found.']);
         }
 
-        // Fetch products using ProductFacade::index() method
         $products = ProductFacade::index();
 
         return view('pages.admin.adminOrders', compact('adminUser', 'products'));
@@ -86,5 +85,17 @@ class AdminController extends Controller
     public function generateProductReport()
     {
         return AdminFacade::generateProductReport();
+    }
+
+
+    public function products()
+    {
+        $adminUser = session('adminUser');
+
+        if (!$adminUser) {
+            return redirect()->route('admin')->withErrors(['message' => 'Admin user not found.']);
+        }
+
+        return view('pages.admin.adminProduct', compact('adminUser'));
     }
 }
