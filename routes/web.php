@@ -33,4 +33,5 @@ Route::prefix('/admin')->group(function () {
     Route::get('/adminDashboard/products', [AdminController::class, "products"])->name('admin.products');
     Route::get('/adminDashboard/products/create', [AdminController::class, "AddProduct"])->name('admin.addProducts');
     Route::post('/admin/products/store', [AdminController::class, "store"])->name('admin.products.store');
+    Route::post('/admin/{product_id}/update', [AdminController::class, "update"])->name('admin.product.update');
 });
