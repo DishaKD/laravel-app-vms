@@ -131,4 +131,10 @@ class AdminController extends Controller
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        AdminFacade::update($request->all(), $id);
+        return redirect()->back();
+    }
 }

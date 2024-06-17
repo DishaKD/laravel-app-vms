@@ -121,4 +121,27 @@ class AdminService
     {
         return Products::all();
     }
+
+    protected $product;
+
+    public function __construct()
+    {
+        $this->product = new Products();
+    }
+
+    public function update(array $data, $id)
+    {
+        $product = $this->product->find($id);
+
+        if ($product) {
+            $product->update([
+                'product_name' => $data['product_name'],
+                'product_sku' => $data['product_sku'],
+                'category' => $data['category'],
+                'initial_price' => $data['initial_price'],
+                'selling_price' => $data['selling_price'],
+                'stock' => $data['stock'],
+            ]);
+        }
+    }
 }
