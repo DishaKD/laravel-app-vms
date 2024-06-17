@@ -23,6 +23,21 @@
             </a>
         </div>
 
+        <!-- Search Input -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <form method="get" action="{{ route('admin.products') }}">
+                    <div class="input-group rounded">
+                        <input type="search" class="form-control rounded" name="search" placeholder="Search"
+                            aria-label="Search" aria-describedby="search-addon" value="{{ request()->input('search') }}" />
+                        <span class="input-group-text border-0" id="search-addon">
+                            <i class="bi bi-search" style="color: black;"></i>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Table Section -->
         <table class="table align-middle mb-0 bg-white">
             <thead class="bg-light">
@@ -84,7 +99,7 @@
                                     <i class="bi bi-pencil-square" style="color: green;"></i>
                                 </button>
                             </a>
-                            <a href="{{ route('product.delete', $product->id) }}">
+                            <a href="{{ route('admin.product.delete', $product->id) }}">
                                 <i class="bi bi-trash" style="font-size: 1.5rem; color: rgb(255, 0, 0);"></i>
                             </a>
                         </td>
