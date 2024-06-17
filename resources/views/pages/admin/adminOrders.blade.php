@@ -68,7 +68,7 @@
                                     data-order-from="{{ $product->order_from }}" data-order-by="{{ $product->order_by }}"
                                     data-contact-info="{{ $product->contact_info }}" data-status="{{ $product->status }}"
                                     data-special-instructions="{{ $product->special_instructions }}">
-                                    Update Status
+                                    <i class="bi bi-arrow-down-up" style="color: green;"></i>
                                 </button>
                             </a>
                             <a href="{{ route('product.delete', $product->id) }}">
