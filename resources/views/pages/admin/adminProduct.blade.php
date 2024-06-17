@@ -31,17 +31,20 @@
                             <input class="form-check-input" type="checkbox" id="selectAll" />
                         </div>
                     </th>
+                    <th>Product Image</th>
                     <th>Product ID</th>
                     <th>Product Title</th>
                     <th>Product SKU</th>
                     <th>Category</th>
-                    <th>Initial Price</th>
-                    <th>Selling Price</th>
+                    <th>Initial Price (LKR)</th>
+                    <th>Selling Price (LKR)</th>
+                    <th>Current Stock</th>
+                    <th>Created Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($products as $product)
+                @foreach ($products as $product)
                     <tr>
                         <td>
                             <div class="form-check">
@@ -49,25 +52,24 @@
                                     data-product-id="{{ $product->id }}" />
                             </div>
                         </td>
+                        <td>{{ $product->image_path }}</td>
+
                         <td>
                             <p class="fw-normal mb-1">{{ $product->id }}</p>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">{{ $product->product_title }}</p>
+                            <p class="fw-normal mb-1">{{ $product->product_name }}</p>
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{ $product->product_sku }}</p>
                         </td>
                         <td>{{ $product->category }}</td>
-                        <td>{{ $product->quantity }}</td>
-                        <td>
-                            @if ($product->status)
-                                <span class="badge badge-success rounded-pill d-inline">Approved</span>
-                            @else
-                                <span class="badge badge-danger rounded-pill d-inline">Not Approved</span>
-                            @endif
-                        </td>
-                        <td>{{ $product->special_instructions }}</td>
+                        <td>{{ $product->initial_price }}</td>
+                        <td>{{ $product->selling_price }}</td>
+                        <td>{{ $product->stock }}</td>
+                        <td>{{ $product->created_at }}</td>
+
+
                         <td>
                             <a href="javascript:void(0)">
                                 <button type="button" class="btn btn-link btn-sm btn-rounded" data-toggle="modal"
@@ -86,7 +88,7 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach --}}
+                @endforeach
             </tbody>
         </table>
     </div>
