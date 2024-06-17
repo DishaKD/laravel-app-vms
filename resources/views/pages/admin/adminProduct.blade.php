@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    @include('components.admin.editModalProducts')
     <style>
         .form-container {
             display: flex;
@@ -74,13 +75,13 @@
                             <a href="javascript:void(0)">
                                 <button type="button" class="btn btn-link btn-sm btn-rounded" data-toggle="modal"
                                     data-target="#editModal{{ $product->id }}"
-                                    data-product-title="{{ $product->product_title }}"
+                                    data-product-title="{{ $product->product_name }}"
                                     data-product-sku="{{ $product->product_sku }}"
-                                    data-category="{{ $product->category }}" data-quantity="{{ $product->quantity }}"
-                                    data-order-from="{{ $product->order_from }}" data-order-by="{{ $product->order_by }}"
-                                    data-contact-info="{{ $product->contact_info }}" data-status="{{ $product->status }}"
-                                    data-special-instructions="{{ $product->special_instructions }}">
-                                    Update Status
+                                    data-category="{{ $product->category }}" data-quantity="{{ $product->initial_price }}"
+                                    data-order-from="{{ $product->selling_price }}" data-order-by="{{ $product->stock }}"
+                                    data-contact-info="{{ $product->image_path }}"
+                                    data-status="{{ $product->created_at }}">
+                                    Edit
                                 </button>
                             </a>
                             <a href="{{ route('product.delete', $product->id) }}">
