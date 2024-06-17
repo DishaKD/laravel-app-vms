@@ -81,7 +81,7 @@
                                     data-order-from="{{ $product->selling_price }}" data-order-by="{{ $product->stock }}"
                                     data-contact-info="{{ $product->image_path }}"
                                     data-status="{{ $product->created_at }}">
-                                    Edit
+                                    <i class="bi bi-pencil-square" style="color: green;"></i>
                                 </button>
                             </a>
                             <a href="{{ route('product.delete', $product->id) }}">
