@@ -98,4 +98,15 @@ class AdminController extends Controller
 
         return view('pages.admin.adminProduct', compact('adminUser'));
     }
+
+    public function AddProduct()
+    {
+        $adminUser = session('adminUser');
+
+        if (!$adminUser) {
+            return redirect()->route('admin')->withErrors(['message' => 'Admin user not found.']);
+        }
+
+        return view('pages.admin.adminAddProduct', compact('adminUser'));
+    }
 }
