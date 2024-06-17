@@ -71,16 +71,23 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="initial_price">Initial Price</label>
-                            <input type="text" id="initial_price" name="initial_price" class="form-control" required>
+                            <div class="input-group">
+                                <span class="input-group-text">LKR</span>
+                                <input type="text" id="initial_price" name="initial_price" class="form-control" required>
+                            </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="selling_price">Selling Price</label>
-                            <input type="text" id="selling_price" name="selling_price" class="form-control" required>
+                            <div class="input-group">
+                                <span class="input-group-text">LKR</span>
+                                <input type="text" id="selling_price" name="selling_price" class="form-control" required>
+                            </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Stock Input -->
                 <div class="form-group mb-4">
