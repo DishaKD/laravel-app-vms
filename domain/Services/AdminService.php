@@ -66,11 +66,11 @@ class AdminService
     }
 
 
-    public function generateProductReport()
+    public function generateOrderReport()
     {
         $products = Orders::all();
 
-        $pdf = $this->generatePdfView('admin.reports.product_report', compact('products'));
+        $pdf = $this->generatePdfView('admin.reports.order_report', compact('products'));
 
         return $pdf;
     }
@@ -93,7 +93,7 @@ class AdminService
 
         $dompdf->render();
 
-        return $dompdf->stream('product_report.pdf');
+        return $dompdf->stream('order_report.pdf');
     }
 
     public function store(array $data)
@@ -117,16 +117,21 @@ class AdminService
         }
     }
 
-    public function getAllProducts()
-    {
-        return Products::all();
-    }
-
     protected $product;
 
     public function __construct()
     {
         $this->product = new Products();
+    }
+    public function products($search = null)
+    {
+        if ($search) {
+            return $this->product->where('product_name', 'LIKE', "%{$search}%")
+                ->orWhere('id', 'LIKE', "%{$search}%")
+                ->orWhere('product_sku', 'LIKE', "%{$search}%")
+                ->get();
+        }
+        return $this->product->all();
     }
 
     public function update(array $data, $id)
@@ -143,5 +148,41 @@ class AdminService
                 'stock' => $data['stock'],
             ]);
         }
+    }
+
+    public function delete($id)
+    {
+        $product = $this->product->find($id);
+        $product->delete();
+    }
+
+    public function generateProductReport()
+    {
+        $products = Products::all();
+
+        $pdf = $this->generateProductPdfView('admin.reports.product_report', compact('products'));
+
+        return $pdf;
+    }
+
+    private function generateProductPdfView($view, $data = [])
+    {
+        $html = view($view, $data)->render();
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $options->set('defaultFont', 'Arial');
+
+        $dompdf = new Dompdf($options);
+
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'landscape'); // Landscape orientation
+
+        $dompdf->render();
+
+        return $dompdf->stream('product_report.pdf');
     }
 }

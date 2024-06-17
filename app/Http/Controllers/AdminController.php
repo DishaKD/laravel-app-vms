@@ -82,21 +82,22 @@ class AdminController extends Controller
     }
 
 
-    public function generateProductReport()
+    public function generateOrderReport()
     {
-        return AdminFacade::generateProductReport();
+        return AdminFacade::generateOrderReport();
     }
 
 
-    public function products()
+    public function products(Request $request)
     {
         $adminUser = session('adminUser');
 
         if (!$adminUser) {
             return redirect()->route('admin')->withErrors(['message' => 'Admin user not found.']);
         }
-
-        $products = AdminFacade::getAllProducts();
+        $search = $request->input('search');
+        $response['products'] = ProductFacade::index($search);
+        $products = AdminFacade::products();
 
         return view('pages.admin.adminProduct', compact('adminUser', 'products'));
     }
@@ -136,5 +137,17 @@ class AdminController extends Controller
     {
         AdminFacade::update($request->all(), $id);
         return redirect()->back();
+    }
+
+    public function delete($product_id)
+    {
+        AdminFacade::delete($product_id);
+
+        return redirect()->back();
+    }
+
+    public function generateProductReport()
+    {
+        return AdminFacade::generateProductReport();
     }
 }
