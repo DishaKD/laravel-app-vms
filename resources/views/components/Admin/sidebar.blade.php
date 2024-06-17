@@ -49,11 +49,18 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.products') }}"
-                    class="nav-link {{ Request::is('admin/products*') ? 'active' : '' }}">
+                <a href="#" class="nav-link nav-link-toggle {{ Request::is('admin/orders*') ? 'active' : '' }}"
+                    data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
                     <i class="bi bi-box-fill"></i>
-                    Products
+                    Orders
+                    <i class="bi bi-caret-down ms-auto"></i>
                 </a>
+                <div class="collapse" id="orders-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="{{ route('admin.products') }}" class="link-dark rounded">All Products</a></li>
+                        <li><a href="{{ route('admin.addProducts') }}" class="link-dark rounded">Add Product</a></li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link text-white">
@@ -63,4 +70,29 @@
             </li>
         </ul>
     </div>
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toggleLinks = document.querySelectorAll('.nav-link-toggle');
+
+            toggleLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    var icon = link.querySelector('.bi-caret-down');
+                    var isExpanded = link.getAttribute('aria-expanded') === 'true';
+
+                    if (isExpanded) {
+                        icon.classList.remove('bi-caret-up');
+                        icon.classList.add('bi-caret-down');
+                    } else {
+                        icon.classList.remove('bi-caret-down');
+                        icon.classList.add('bi-caret-up');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
